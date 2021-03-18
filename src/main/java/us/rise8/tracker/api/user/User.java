@@ -13,7 +13,7 @@ import us.rise8.tracker.api.user.dto.UserDTO;
 
 @Entity @Getter @Setter
 @Table(name = "users")
-public class UserEntity extends AbstractEntity<UserDTO> {
+public class User extends AbstractEntity<UserDTO> {
 
     @NaturalId(mutable = false)
     @Column(columnDefinition = "VARCHAR(100)", unique = true, nullable = false)
@@ -51,7 +51,7 @@ public class UserEntity extends AbstractEntity<UserDTO> {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        UserEntity that = (UserEntity) o;
+        User that = (User) o;
         return this.hashCode() == that.hashCode();
     }
 }

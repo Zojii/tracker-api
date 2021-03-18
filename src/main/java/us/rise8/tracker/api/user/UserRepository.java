@@ -5,9 +5,9 @@ import java.util.Optional;
 import us.rise8.tracker.api.RepositoryInterface;
 import us.rise8.tracker.api.user.dto.UserDTO;
 
-public interface UserRepository extends RepositoryInterface<UserEntity, UserDTO> {
+public interface UserRepository extends RepositoryInterface<User, UserDTO> {
 
-    Optional<UserEntity> findByUsername(String username);
+    Optional<User> findByUsername(String username);
 
-    Optional<UserEntity> findByKeycloakUid(String keycloakId);
+    Optional<User> findByKeycloakUid(String keycloakId);
 }

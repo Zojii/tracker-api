@@ -23,7 +23,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 
 import us.rise8.tracker.api.helper.Builder;
-import us.rise8.tracker.api.user.UserEntity;
+import us.rise8.tracker.api.user.User;
 import us.rise8.tracker.api.user.UserService;
 import us.rise8.tracker.exception.EntityNotFoundException;
 import us.rise8.tracker.helpers.RequestContext;
@@ -33,7 +33,7 @@ import us.rise8.tracker.helpers.RequestContext;
 public class UniqueUsernameValidatorTests {
 
     private final LocalDateTime CREATION_DATE = LocalDateTime.now();
-    private final UserEntity foundUser = Builder.build(UserEntity.class)
+    private final User foundUser = Builder.build(User.class)
             .with(u -> u.setId(1L))
             .with(u -> u.setKeycloakUid("abc-123"))
             .with(u -> u.setUsername("foo"))

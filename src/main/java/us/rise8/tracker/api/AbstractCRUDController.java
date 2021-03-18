@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import us.rise8.tracker.api.search.annotation.SearchSpec;
-import us.rise8.tracker.config.auth.IsAdmin;
 
 @CrossOrigin
 public abstract class AbstractCRUDController<
@@ -48,7 +47,6 @@ public abstract class AbstractCRUDController<
     }
 
     @Override
-    @IsAdmin
     @DeleteMapping("/{id}")
     public void deleteById(@PathVariable Long id) {
         service.deleteById(id);

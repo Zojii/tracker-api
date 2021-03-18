@@ -5,22 +5,14 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
-import java.util.ArrayList;
-import java.util.List;
-
-import org.springframework.security.authentication.AuthenticationCredentialsNotFoundException;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
 import org.junit.jupiter.api.Test;
 
-import us.rise8.tracker.api.user.UserEntity;
-import us.rise8.tracker.config.auth.platform1.PlatformOneAuthenticationToken;
+import us.rise8.tracker.api.user.User;
 
 public class JsonMapperTests {
 
-    private final UserEntity user = Builder.build(UserEntity.class)
+    private final User user = Builder.build(User.class)
             .with(u -> u.setId(1L))
             .with(u -> u.setKeycloakUid("Hello")).get();
 
@@ -31,15 +23,6 @@ public class JsonMapperTests {
         constructor.setAccessible(true);
         Exception exception = assertThrows(InvocationTargetException.class, constructor::newInstance);
         assertThat(exception.getCause().getClass()).isEqualTo(IllegalStateException.class);
-    }
-
-    @Test
-    public void should_get_keycloak_uid_from_auth() throws AuthenticationCredentialsNotFoundException {
-        List<GrantedAuthority> authorityList = new ArrayList<>();
-        authorityList.add(new SimpleGrantedAuthority("IS_AUTHENTICATED"));
-        Authentication auth = new PlatformOneAuthenticationToken(user, null, authorityList);
-
-        assertThat(JsonMapper.getKeycloakUidFromAuth(auth)).isEqualTo("Hello");
     }
 
 }

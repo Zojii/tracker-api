@@ -38,7 +38,6 @@ import us.rise8.tracker.api.user.dto.UpdateUserDisabledDTO;
 import us.rise8.tracker.api.user.dto.UpdateUserRolesDTO;
 import us.rise8.tracker.api.user.dto.UserDTO;
 import us.rise8.tracker.config.CustomProperty;
-import us.rise8.tracker.config.auth.platform1.PlatformOneAuthenticationToken;
 import us.rise8.tracker.exception.EntityNotFoundException;
 
 @ExtendWith(SpringExtension.class)
@@ -52,10 +51,10 @@ public class UserServiceTests {
     @MockBean
     CustomProperty property;
     @Captor
-    ArgumentCaptor<UserEntity> userCaptor;
+    ArgumentCaptor<User> userCaptor;
 
     private final LocalDateTime CREATION_DATE = LocalDateTime.now();
-    private final UserEntity user1 = Builder.build(UserEntity.class)
+    private final User user1 = Builder.build(User.class)
             .with(u -> u.setId(1L))
             .with(u -> u.setKeycloakUid("def-456"))
             .with(u -> u.setUsername("yoda"))
@@ -64,7 +63,7 @@ public class UserServiceTests {
             .with(u -> u.setCreationDate(CREATION_DATE))
             .with(u -> u.setDodId(123L))
             .with(u -> u.setRoles(0L)).get();
-    private final UserEntity user2 = Builder.build(UserEntity.class)
+    private final User user2 = Builder.build(User.class)
             .with(u -> u.setId(2L))
             .with(u -> u.setKeycloakUid("abc-123"))
             .with(u -> u.setUsername("grogu"))
@@ -74,26 +73,8 @@ public class UserServiceTests {
             .with(u -> u.setDodId(789L))
             .with(u -> u.setRoles(1L)).get();
     private final List<String> groups = List.of("tracker-IL2-admin");
-    private final PlatformOneAuthenticationToken token = new PlatformOneAuthenticationToken(
-            "abc-123", 1L, "grogu", "a.b@c", groups);
-    private final List<UserEntity> users = List.of(user1, user2);
-    private final Page<UserEntity> page = new PageImpl<UserEntity>(users);
-
-    @Test
-    public void should_create_user() {
-        when(property.getJwtAdminGroup()).thenReturn("tracker-IL2-admin");
-        when(userRepository.save(any())).thenReturn(new UserEntity());
-
-        userService.create(token);
-        verify(userRepository, times(1)).save(userCaptor.capture());
-        UserEntity userCaptured = userCaptor.getValue();
-
-        assertThat(userCaptured.getKeycloakUid()).isEqualTo(token.getKeycloakUid());
-        assertThat(userCaptured.getDodId()).isEqualTo(token.getDodId());
-        assertThat(userCaptured.getDisplayName()).isEqualTo(token.getDisplayName());
-        assertThat(userCaptured.getEmail()).isEqualTo(token.getEmail());
-        assertThat(userCaptured.getRoles()).isEqualTo(1L);
-    }
+    private final List<User> users = List.of(user1, user2);
+    private final Page<User> page = new PageImpl<User>(users);
 
     @Test
     public void should_get_user_by_id() throws EntityNotFoundException {
@@ -147,7 +128,7 @@ public class UserServiceTests {
 
     @Test
     public void should_get_user_and_return_user() throws EntityNotFoundException {
-        when(userRepository.findById(any())).thenReturn(java.util.Optional.of(new UserEntity()));
+        when(userRepository.findById(any())).thenReturn(java.util.Optional.of(new User()));
 
         userService.findById(1L);
 
@@ -167,7 +148,7 @@ public class UserServiceTests {
         userService.updateById(1L, updateDTO);
 
         verify(userRepository, times(1)).save(userCaptor.capture());
-        UserEntity userCaptured = userCaptor.getValue();
+        User userCaptured = userCaptor.getValue();
 
         assertThat(userCaptured.getUsername()).isEqualTo(updateDTO.getUsername());
         assertThat(userCaptured.getEmail()).isEqualTo(updateDTO.getEmail());
@@ -206,13 +187,13 @@ public class UserServiceTests {
     public void should_prepare_paged_response() {
         List<UserDTO> results = userService.preparePageResponse(page, new MockHttpServletResponse());
 
-        assertThat(results).isEqualTo(users.stream().map(UserEntity::toDto).collect(Collectors.toList()));
+        assertThat(results).isEqualTo(users.stream().map(User::toDto).collect(Collectors.toList()));
     }
 
     @Test
     public void should_retrieve_all_users() {
-        SpecificationsBuilder<UserEntity> builder = new SpecificationsBuilder<>();
-        Specification<UserEntity> specs = builder.withSearch("id:1").build();
+        SpecificationsBuilder<User> builder = new SpecificationsBuilder<>();
+        Specification<User> specs = builder.withSearch("id:1").build();
 
         when(userRepository.findAll(eq(specs), any(PageRequest.class))).thenReturn(page);
 

@@ -1,7 +1,6 @@
 package us.rise8.tracker.api.init;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -11,6 +10,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
 import us.rise8.tracker.api.init.dto.InfoDTO;
+import us.rise8.tracker.api.user.User;
 import us.rise8.tracker.api.user.UserService;
 import us.rise8.tracker.api.user.dto.UserDTO;
 import us.rise8.tracker.config.CustomProperty;
@@ -39,7 +39,7 @@ public class InitController {
     @ApiOperation(value = "Returns currently logged in user",
             notes = "PlatformOne identity management never informs the frontend of the user identity")
     @GetMapping("/user")
-    public UserDTO loginInit(Authentication auth) throws JsonProcessingException {
-        return userService.getUserFromAuth(auth).toDto();
+    public UserDTO loginInit() throws JsonProcessingException {
+        return new User().toDto();
     }
 }

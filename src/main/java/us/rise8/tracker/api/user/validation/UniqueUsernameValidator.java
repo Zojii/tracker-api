@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import lombok.Setter;
 
 import us.rise8.tracker.api.helper.HttpPathVariableIdGrabber;
-import us.rise8.tracker.api.user.UserEntity;
+import us.rise8.tracker.api.user.User;
 import us.rise8.tracker.api.user.UserService;
 import us.rise8.tracker.exception.EntityNotFoundException;
 
@@ -29,7 +29,7 @@ public class UniqueUsernameValidator implements ConstraintValidator<UniqueUserna
     @Override
     public boolean isValid(String username, ConstraintValidatorContext constraintContext) {
         try {
-            UserEntity existingUser = userService.findByUsername(username);
+            User existingUser = userService.findByUsername(username);
             if (isNew) {
                 return false;
             } else {

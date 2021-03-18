@@ -15,7 +15,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import us.rise8.tracker.api.helper.Builder;
-import us.rise8.tracker.api.user.UserEntity;
+import us.rise8.tracker.api.user.User;
 import us.rise8.tracker.api.user.UserRepository;
 
 @DataJpaTest
@@ -27,12 +27,12 @@ public class SpecificationImplTests {
     @Autowired
     UserRepository userRepository;
 
-    private final UserEntity testUser1 = Builder.build(UserEntity.class)
+    private final User testUser1 = Builder.build(User.class)
             .with(u -> u.setKeycloakUid("abc-123"))
             .with(u -> u.setUsername("foo"))
             .with(u -> u.setEmail("a.b@c"))
             .with(u -> u.setDisplayName("Mr.Foo")).get();
-    private final UserEntity testUser2 = Builder.build(UserEntity.class)
+    private final User testUser2 = Builder.build(User.class)
             .with(u -> u.setKeycloakUid("def-456"))
             .with(u -> u.setUsername("foobar"))
             .with(u -> u.setEmail("d.e@f"))
@@ -48,8 +48,8 @@ public class SpecificationImplTests {
     @Test
     public void should_use_null_parse_strategy() {
         SearchCriteria criteria = new SearchCriteria("creationDate", ":", null, LocalDateTime.now().toString(), null);
-        Specification<UserEntity> specs = new SpecificationImpl<>(criteria);
-        List<UserEntity> users = userRepository.findAll(specs);
+        Specification<User> specs = new SpecificationImpl<>(criteria);
+        List<User> users = userRepository.findAll(specs);
 
         assertThat(users.size()).isEqualTo(2);
     }

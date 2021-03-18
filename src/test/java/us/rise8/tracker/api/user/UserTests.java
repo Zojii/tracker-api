@@ -11,7 +11,7 @@ import org.junit.jupiter.api.Test;
 import us.rise8.tracker.api.helper.Builder;
 import us.rise8.tracker.api.user.dto.UserDTO;
 
-public class UserEntityTests {
+public class UserTests {
 
     private final LocalDateTime CREATION_DATE = LocalDateTime.now();
     private final UserDTO userDTO = Builder.build(UserDTO.class)
@@ -24,7 +24,7 @@ public class UserEntityTests {
             .with(u -> u.setDodId(1L))
             .with(u -> u.setIsDisabled(false))
             .with(u -> u.setRoles(0L)).get();
-    private final UserEntity expectedUser = Builder.build(UserEntity.class)
+    private final User expectedUser = Builder.build(User.class)
             .with(u -> u.setId(1L))
             .with(u -> u.setKeycloakUid("abc-123"))
             .with(u -> u.setUsername("grogu"))
@@ -37,7 +37,7 @@ public class UserEntityTests {
 
     @Test
     public void should_set_and_get_properties() {
-        UserEntity user = Builder.build(UserEntity.class)
+        User user = Builder.build(User.class)
                 .with(u -> u.setId(1L))
                 .with(u -> u.setKeycloakUid("abc-123"))
                 .with(u -> u.setUsername("foo"))
@@ -66,12 +66,12 @@ public class UserEntityTests {
 
     @Test
     public void should_be_equal() {
-        UserEntity user2 = Builder.build(UserEntity.class)
+        User user2 = Builder.build(User.class)
                 .with(u -> u.setKeycloakUid("abc-123")).get();
 
         assertTrue(expectedUser.equals(expectedUser));
         assertFalse(expectedUser.equals(null));
-        assertFalse(expectedUser.equals(new UserEntity()));
+        assertFalse(expectedUser.equals(new User()));
         // cannot test until there is another Model in template
         // assertFalse(expectedUser.equals(new Model()));
         assertTrue(expectedUser.equals(user2));
