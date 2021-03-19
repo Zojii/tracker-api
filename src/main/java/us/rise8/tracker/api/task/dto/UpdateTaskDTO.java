@@ -12,6 +12,6 @@ import lombok.Setter;
 @NoArgsConstructor
 public class UpdateTaskDTO {
     @NotBlank
-    private String details;
+    private String detail;
     private boolean isComplete;
 }

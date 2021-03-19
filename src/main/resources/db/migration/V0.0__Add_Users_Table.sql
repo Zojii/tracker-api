@@ -9,17 +9,17 @@ INSERT INTO `hibernate_sequence` (next_val) VALUES(2);
 -- store basic P1 user info
 CREATE TABLE `users` (
   `id` BIGINT NOT NULL,
-  `dod_id` BIGINT,
-  `keycloak_uid` VARCHAR(100) NOT NULL,
-  `username` VARCHAR(100) NOT NULL,
   `email` VARCHAR(100),
-  `display_name` VARCHAR(100),
-  `roles` BIGINT NOT NULL DEFAULT 0,
   `creation_date` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `is_disabled` BIT(1) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
--- add a user for local development, user is disabled in production
-INSERT INTO `users` (id, dod_id, keycloak_uid, username, roles)
-  VALUES(1, 9999999999, 'keycloak-sub-123', 'localuser', 1);
+CREATE TABLE `tasks`(
+    `id` BIGINT NOT NULL,
+    `detail` TINYTEXT NOT NULL,
+    `creation_date` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    `user_id` BIGINT,
+    `is_complete` BIT(1) DEFAULT FALSE,
+    PRIMARY KEY (`id`),
+    FOREIGN KEY (`user_id`) REFERENCES users(`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;

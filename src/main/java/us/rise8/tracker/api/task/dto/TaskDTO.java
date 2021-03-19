@@ -13,7 +13,7 @@ import us.rise8.tracker.api.AbstractDTO;
 @NoArgsConstructor
 public class TaskDTO implements AbstractDTO {
     private Long id;
-    private String details;
+    private String detail;
     private LocalDateTime creationDate;
     private boolean isComplete;
     private Long taskId;

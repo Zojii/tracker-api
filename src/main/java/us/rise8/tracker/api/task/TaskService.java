@@ -22,7 +22,7 @@ public class TaskService extends AbstractCRUDService<Task, TaskDTO, TaskReposito
 
     public Task create(Long id, CreateTaskDTO createTaskDTO) {
         Task task = getObject(id);
-        task.setDetails(createTaskDTO.getDetails());
+        task.setDetail(createTaskDTO.getDetail());
         task.setComplete(createTaskDTO.isComplete());
 
         return repository.save(task);
@@ -30,7 +30,7 @@ public class TaskService extends AbstractCRUDService<Task, TaskDTO, TaskReposito
 
     public Task updateById(Long id, UpdateTaskDTO updateTaskDTO) {
         Task task = getObject(id);
-        task.setDetails(updateTaskDTO.getDetails());
+        task.setDetail(updateTaskDTO.getDetail());
         task.setComplete(updateTaskDTO.isComplete());
 
         return repository.save(task);
