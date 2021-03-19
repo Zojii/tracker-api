@@ -11,9 +11,11 @@ import us.rise8.tracker.api.AbstractDTO;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class UserDTO implements AbstractDTO {
+public class TaskDTO implements AbstractDTO {
     private Long id;
-    private String email;
+    private String details;
     private LocalDateTime creationDate;
+    private boolean isComplete;
+    private Long taskId;
 }
 

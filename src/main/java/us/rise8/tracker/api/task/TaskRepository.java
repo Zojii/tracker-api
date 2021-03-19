@@ -1,12 +1,8 @@
 package us.rise8.tracker.api.task;
 
-import java.util.Optional;
-
 import us.rise8.tracker.api.RepositoryInterface;
-import us.rise8.tracker.api.user.dto.UserDTO;
+import us.rise8.tracker.api.task.dto.TaskDTO;
 
-public interface TaskRepository extends RepositoryInterface<Task, UserDTO> {
-
-    Optional<Task> findByEmail(String username);
+public interface TaskRepository extends RepositoryInterface<Task, TaskDTO> {
 
 }

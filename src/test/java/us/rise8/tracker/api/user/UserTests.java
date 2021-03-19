@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 import java.time.LocalDateTime;
+import java.util.HashSet;
 
 import org.junit.jupiter.api.Test;
 
@@ -17,6 +18,7 @@ public class UserTests {
     private final UserDTO userDTO = Builder.build(UserDTO.class)
             .with(u -> u.setId(1L))
             .with(u -> u.setEmail("a.b@c"))
+            .with(u -> u.setTaskIds(new HashSet<>()))
             .with(u -> u.setCreationDate(CREATION_DATE)).get();
     private final User expectedUser = Builder.build(User.class)
             .with(u -> u.setId(1L))
@@ -36,7 +38,7 @@ public class UserTests {
     }
 
     @Test
-    public void canReturnDTO() {
+    public void should_Return_DTO() {
         assertThat(expectedUser.toDto()).isEqualTo(userDTO);
     }
 

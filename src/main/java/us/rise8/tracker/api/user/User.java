@@ -1,14 +1,22 @@
 package us.rise8.tracker.api.user;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import java.util.HashSet;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import us.rise8.tracker.api.AbstractEntity;
+import us.rise8.tracker.api.task.Task;
 import us.rise8.tracker.api.user.dto.UserDTO;
 
 @Entity @Getter @Setter
@@ -19,8 +27,16 @@ public class User extends AbstractEntity<UserDTO> {
     @Column(columnDefinition = "VARCHAR(100)")
     private String email;
 
+    @OneToMany(orphanRemoval = true, cascade = CascadeType.ALL)
+    @JoinColumn(name = "task_id", referencedColumnName = "id")
+    private Set<Task> tasks = new HashSet<>();
+
     public UserDTO toDto() {
-        return new UserDTO(id, email, creationDate);
+        Set<Long> taskIds = new HashSet<>();
+        if(!tasks.isEmpty()) {
+            taskIds = tasks.stream().map(Task::getId).collect(Collectors.toSet());
+        }
+        return new UserDTO(id, email, creationDate, taskIds);
     }
 
     public User(String email) {

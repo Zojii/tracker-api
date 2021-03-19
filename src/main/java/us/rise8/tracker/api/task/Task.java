@@ -1,29 +1,44 @@
 package us.rise8.tracker.api.task;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import us.rise8.tracker.api.AbstractEntity;
-import us.rise8.tracker.api.user.dto.UserDTO;
+import us.rise8.tracker.api.task.dto.TaskDTO;
 
 @Entity @Getter @Setter
-@Table(name = "users")
-public class Task extends AbstractEntity<UserDTO> {
+@AllArgsConstructor
+@NoArgsConstructor
+@Table(name = "tasks")
+public class Task extends AbstractEntity<TaskDTO> {
 
-    @Column(columnDefinition = "VARCHAR(100)")
-    private String email;
+    @Column(name = "details", columnDefinition = "TEXT", nullable = false)
+    private String details;
 
-    public UserDTO toDto() {
-        return new UserDTO(id, email, creationDate);
+    @Column(name = "is_completed", columnDefinition = "BIT(1) DEFAULT FALSE")
+    private boolean isComplete = false;
+
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "task_id")
+    private Task task;
+
+    public TaskDTO toDto() {
+        return new TaskDTO(id, details, creationDate, isComplete, task.getId());
     }
 
     @Override
     public int hashCode() {
-        return java.util.Objects.hashCode(email);
+        return java.util.Objects.hashCode(details);
     }
 
     @Override

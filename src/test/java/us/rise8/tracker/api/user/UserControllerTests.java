@@ -52,7 +52,7 @@ public class UserControllerTests extends ControllerTestHarness {
             .with(u -> u.setId(2L))
             .with(u -> u.setEmail("a.b@c"))
             .with(u -> u.setCreationDate(CREATION_DATE)).get();
-    private User user1Updated = new User();
+    private final User user1Updated = new User();
     private final List<User> users = List.of(user1, user2);
 
     @BeforeEach
