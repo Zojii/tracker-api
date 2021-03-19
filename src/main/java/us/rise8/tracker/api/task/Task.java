@@ -22,23 +22,23 @@ import us.rise8.tracker.api.task.dto.TaskDTO;
 @Table(name = "tasks")
 public class Task extends AbstractEntity<TaskDTO> {
 
-    @Column(name = "details", columnDefinition = "TEXT", nullable = false)
-    private String details;
+    @Column(name = "detail", columnDefinition = "TEXT", nullable = false)
+    private String detail;
 
-    @Column(name = "is_completed", columnDefinition = "BIT(1) DEFAULT FALSE")
+    @Column(name = "is_complete", columnDefinition = "BIT(1) DEFAULT FALSE")
     private boolean isComplete = false;
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "task_id")
+    @JoinColumn(name = "user_id")
     private Task task;
 
     public TaskDTO toDto() {
-        return new TaskDTO(id, details, creationDate, isComplete, task.getId());
+        return new TaskDTO(id, detail, creationDate, isComplete, task.getId());
     }
 
     @Override
     public int hashCode() {
-        return java.util.Objects.hashCode(details);
+        return java.util.Objects.hashCode(detail);
     }
 
     @Override

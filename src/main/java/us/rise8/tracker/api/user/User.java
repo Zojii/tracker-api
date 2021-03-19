@@ -3,7 +3,6 @@ package us.rise8.tracker.api.user;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -27,8 +26,7 @@ public class User extends AbstractEntity<UserDTO> {
     @Column(columnDefinition = "VARCHAR(100)")
     private String email;
 
-    @OneToMany(orphanRemoval = true, cascade = CascadeType.ALL)
-    @JoinColumn(name = "task_id", referencedColumnName = "id")
+    @OneToMany(orphanRemoval = true, cascade = CascadeType.ALL, mappedBy = "task")
     private Set<Task> tasks = new HashSet<>();
 
     public UserDTO toDto() {
