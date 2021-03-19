@@ -25,7 +25,7 @@ public class InitController {
 
     @ApiOperation(value = "Classification context info",
             notes = "Returns classification context")
-    @GetMapping("/info")
+    @GetMapping
     public InfoDTO getInfo() {
         return new InfoDTO(property.getClassification(), property.getCaveat());
     }
