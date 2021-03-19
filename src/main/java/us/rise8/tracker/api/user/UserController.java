@@ -2,7 +2,7 @@ package us.rise8.tracker.api.user;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -22,7 +22,7 @@ public class UserController extends AbstractCRUDController<User, UserDTO, UserSe
         super(userService);
     }
 
-    @GetMapping("/email")
+    @PutMapping("/email")
     public UserDTO getByEmail(@RequestBody UserDTO user) {
         return service.getByEmail("e.b@c").toDto();
     }

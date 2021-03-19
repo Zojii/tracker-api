@@ -32,7 +32,7 @@ public class InitControllerTest extends ControllerTestHarness {
     @Test
     public void should_get_public_info() throws Exception {
 
-        String endpoint = "/init/info";
+        String endpoint = "/init";
 
         when(property.getClassification()).thenReturn("UNCLASS");
         when(property.getCaveat()).thenReturn("IL2");
@@ -48,7 +48,7 @@ public class InitControllerTest extends ControllerTestHarness {
         when(property.getClassification()).thenReturn("UNCLASS");
         when(property.getCaveat()).thenReturn("IL2");
 
-        mockMvc.perform(get("/init/info"))
+        mockMvc.perform(get("/init"))
                 .andExpect(jsonPath("$.classification").isMap())
                 .andExpect(jsonPath("$.classification.name").isNotEmpty())
                 .andExpect(jsonPath("$.classification.caveat").isNotEmpty())
