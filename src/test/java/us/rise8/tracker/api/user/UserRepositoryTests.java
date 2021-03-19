@@ -24,30 +24,15 @@ public class UserRepositoryTests {
     UserRepository userRepository;
 
     @Test
-    public void should_find_by_username() {
+    public void should_find_by_email() {
 
         User testUser = Builder.build(User.class)
-                .with(u -> u.setKeycloakUid("abc-123"))
-                .with(u -> u.setUsername("foo")).get();
+                .with(u -> u.setEmail("abc-123")).get();
 
         entityManager.persist(testUser);
         entityManager.flush();
 
-        Optional<User> foundUser = userRepository.findByUsername(testUser.getUsername());
-
-        assertThat(foundUser.orElse(new User())).isEqualTo(testUser);
-    }
-
-    @Test
-    public void should_find_by_keycloakid() {
-        User testUser = Builder.build(User.class)
-                .with(u -> u.setUsername("bar"))
-                .with(u -> u.setKeycloakUid("abc-123-efg")).get();
-
-        entityManager.persist(testUser);
-        entityManager.flush();
-
-        Optional<User> foundUser = userRepository.findByKeycloakUid(testUser.getKeycloakUid());
+        Optional<User> foundUser = userRepository.findByEmail(testUser.getEmail());
 
         assertThat(foundUser.orElse(new User())).isEqualTo(testUser);
     }

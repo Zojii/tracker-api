@@ -12,8 +12,8 @@ public class BuilderTests {
     public void shouldBuildClassObject() {
 
         User user = Builder.build(User.class)
-                .with(u -> u.setUsername("Foo")).get();
-        assertThat(user.getUsername()).isEqualTo("Foo");
+                .with(u -> u.setEmail("Foo")).get();
+        assertThat(user.getEmail()).isEqualTo("Foo");
     }
 
 }

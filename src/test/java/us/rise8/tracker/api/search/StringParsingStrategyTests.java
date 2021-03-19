@@ -27,15 +27,9 @@ public class StringParsingStrategyTests {
     UserRepository userRepository;
 
     private final User testUser1 = Builder.build(User.class)
-            .with(u -> u.setKeycloakUid("abc-123"))
-            .with(u -> u.setUsername("foo"))
-            .with(u -> u.setEmail("a.b@c"))
-            .with(u -> u.setDisplayName("Mr.Foo")).get();
+            .with(u -> u.setEmail("foo")).get();
     private final User testUser2 = Builder.build(User.class)
-            .with(u -> u.setKeycloakUid("def-456"))
-            .with(u -> u.setUsername("foobar"))
-            .with(u -> u.setEmail("d.e@f"))
-            .with(u -> u.setDisplayName("foobar")).get();
+            .with(u -> u.setEmail("foobar")).get();
 
     @BeforeEach
     public void init() {
@@ -46,45 +40,45 @@ public class StringParsingStrategyTests {
 
     @Test
     public void should_search_by_spec_and_parsing_strat_string_equal_to() {
-        SearchCriteria criteria = new SearchCriteria("username", ":", null, "foo", null);
+        SearchCriteria criteria = new SearchCriteria("email", ":", null, "foo", null);
         Specification<User> specs = new SpecificationImpl<>(criteria);
         List<User> users = userRepository.findAll(specs);
 
-        assertThat(users.get(0).getUsername()).isEqualTo(testUser1.getUsername());
+        assertThat(users.get(0).getEmail()).isEqualTo(testUser1.getEmail());
     }
 
     @Test
     public void should_search_by_spec_and_parsing_strat_string_not_equal_to() {
-        SearchCriteria criteria = new SearchCriteria("username", "!", null, "foobar", null);
+        SearchCriteria criteria = new SearchCriteria("email", "!", null, "foobar", null);
         Specification<User> specs = new SpecificationImpl<>(criteria);
         List<User> users = userRepository.findAll(specs);
 
-        assertThat(users.get(0).getUsername()).isEqualTo(testUser1.getUsername());
+        assertThat(users.get(0).getEmail()).isEqualTo(testUser1.getEmail());
     }
 
     @Test
     public void should_search_by_spec_and_parsing_strat_string_greater_than() {
-        SearchCriteria criteria = new SearchCriteria("username", ">", null, "fooba", null);
+        SearchCriteria criteria = new SearchCriteria("email", ">", null, "fooba", null);
         Specification<User> specs = new SpecificationImpl<>(criteria);
         List<User> users = userRepository.findAll(specs);
 
         assertThat(users.size()).isEqualTo(1);
-        assertThat(users.get(0).getUsername()).isEqualTo(testUser2.getUsername());
+        assertThat(users.get(0).getEmail()).isEqualTo(testUser2.getEmail());
     }
 
     @Test
     public void should_search_by_spec_and_parsing_strat_string_less_than() {
-        SearchCriteria criteria = new SearchCriteria("username", "<", null, "foobar", null);
+        SearchCriteria criteria = new SearchCriteria("email", "<", null, "foobar", null);
         Specification<User> specs = new SpecificationImpl<>(criteria);
         List<User> users = userRepository.findAll(specs);
 
         assertThat(users.size()).isEqualTo(1);
-        assertThat(users.get(0).getUsername()).isEqualTo(testUser1.getUsername());
+        assertThat(users.get(0).getEmail()).isEqualTo(testUser1.getEmail());
     }
 
     @Test
     public void should_search_by_spec_and_parsing_strat_string_starts_with() {
-        SearchCriteria criteria = new SearchCriteria("username", ":", null, "foo", "*");
+        SearchCriteria criteria = new SearchCriteria("email", ":", null, "foo", "*");
         Specification<User> specs = new SpecificationImpl<>(criteria);
         List<User> users = userRepository.findAll(specs);
 
@@ -93,17 +87,17 @@ public class StringParsingStrategyTests {
 
     @Test
     public void should_search_by_spec_and_parsing_strat_string_ends_with() {
-        SearchCriteria criteria = new SearchCriteria("username", ":", "*", "bar", null);
+        SearchCriteria criteria = new SearchCriteria("email", ":", "*", "bar", null);
         Specification<User> specs = new SpecificationImpl<>(criteria);
         List<User> users = userRepository.findAll(specs);
 
         assertThat(users.size()).isEqualTo(1);
-        assertThat(users.get(0).getUsername()).isEqualTo(testUser2.getUsername());
+        assertThat(users.get(0).getEmail()).isEqualTo(testUser2.getEmail());
     }
 
     @Test
     public void should_search_by_spec_and_parsing_strat_string_contains() {
-        SearchCriteria criteria = new SearchCriteria("username", ":", "*", "oo", "*");
+        SearchCriteria criteria = new SearchCriteria("email", ":", "*", "oo", "*");
         Specification<User> specs = new SpecificationImpl<>(criteria);
         List<User> users = userRepository.findAll(specs);
 
@@ -112,7 +106,7 @@ public class StringParsingStrategyTests {
 
     @Test
     public void should_search_by_spec_and_parsing_strat_string_does_not_starts_with() {
-        SearchCriteria criteria = new SearchCriteria("username", "!", null, "foo", "*");
+        SearchCriteria criteria = new SearchCriteria("email", "!", null, "foo", "*");
         Specification<User> specs = new SpecificationImpl<>(criteria);
         List<User> users = userRepository.findAll(specs);
 
@@ -121,17 +115,17 @@ public class StringParsingStrategyTests {
 
     @Test
     public void should_search_by_spec_and_parsing_strat_string_does_not_ends_with() {
-        SearchCriteria criteria = new SearchCriteria("username", "!", "*", "bar", null);
+        SearchCriteria criteria = new SearchCriteria("email", "!", "*", "bar", null);
         Specification<User> specs = new SpecificationImpl<>(criteria);
         List<User> users = userRepository.findAll(specs);
 
         assertThat(users.size()).isEqualTo(1);
-        assertThat(users.get(0).getUsername()).isEqualTo(testUser1.getUsername());
+        assertThat(users.get(0).getEmail()).isEqualTo(testUser1.getEmail());
     }
 
     @Test
     public void should_search_by_spec_and_parsing_strat_string_does_not_contain() {
-        SearchCriteria criteria = new SearchCriteria("username", "!", "*", "oo", "*");
+        SearchCriteria criteria = new SearchCriteria("email", "!", "*", "oo", "*");
         Specification<User> specs = new SpecificationImpl<>(criteria);
         List<User> users = userRepository.findAll(specs);
 

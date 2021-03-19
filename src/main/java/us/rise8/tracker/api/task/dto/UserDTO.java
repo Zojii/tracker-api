@@ -1,4 +1,4 @@
-package us.rise8.tracker.api.user.dto;
+package us.rise8.tracker.api.task.dto;
 
 import java.time.LocalDateTime;
 
