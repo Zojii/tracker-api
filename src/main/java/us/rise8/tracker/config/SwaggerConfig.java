@@ -19,7 +19,7 @@ public class SwaggerConfig {
     @Bean
     public Docket userApi() {
         return new Docket(DocumentationType.SWAGGER_2)
-                .groupName("User-Controller")
+                .groupName("Task-Controller")
                 .select()
                 .apis(RequestHandlerSelectors.any())
                 .paths(PathSelectors.ant("/api/users")

@@ -1,9 +1,6 @@
-package us.rise8.tracker.api.user.dto;
-
-import javax.validation.constraints.NotBlank;
+package us.rise8.tracker.api.task.dto;
 
 import java.time.LocalDateTime;
-import java.util.Set;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -14,11 +11,11 @@ import us.rise8.tracker.api.AbstractDTO;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class UserDTO implements AbstractDTO {
+public class TaskDTO implements AbstractDTO {
     private Long id;
-    @NotBlank
-    private String email;
+    private String details;
     private LocalDateTime creationDate;
-    private Set<Long> taskIds;
+    private boolean isComplete;
+    private Long taskId;
 }
 

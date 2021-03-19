@@ -8,13 +8,7 @@ import java.lang.reflect.InvocationTargetException;
 
 import org.junit.jupiter.api.Test;
 
-import us.rise8.tracker.api.user.User;
-
 public class JsonMapperTests {
-
-    private final User user = Builder.build(User.class)
-            .with(u -> u.setId(1L))
-            .with(u -> u.setKeycloakUid("Hello")).get();
 
     @Test
     public void should_throw_error_if_private_constructor_is_called() throws Exception {

@@ -53,10 +53,6 @@ public class InitControllerTest extends ControllerTestHarness {
                 .andExpect(jsonPath("$.classification.name").isNotEmpty())
                 .andExpect(jsonPath("$.classification.caveat").isNotEmpty())
                 .andExpect(jsonPath("$.classification.backgroundColor").isNotEmpty())
-                .andExpect(jsonPath("$.classification.textColor").isNotEmpty())
-                .andExpect(jsonPath("$.roles").isArray())
-                .andExpect(jsonPath("$.roles[*].name").isNotEmpty())
-                .andExpect(jsonPath("$.roles[*].offset").isNotEmpty())
-                .andExpect(jsonPath("$.roles[*].description").isNotEmpty());
+                .andExpect(jsonPath("$.classification.textColor").isNotEmpty());
     }
 }

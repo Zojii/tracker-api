@@ -16,7 +16,7 @@ This template is a foundation for a SpringBoot Rest api
 - Mysql 8 db
 - flyway db migration mgmt
 - ANTLR for supporting search in endpoints ex `/api/users?search=id:1`
-- a user slice with a controller, service, dao, and DTOs
+- a task slice with a controller, service, dao, and DTOs
 - Custom Exceptions and ExceptionHandling
 - junit5 tests for the slice
 - custom validation
