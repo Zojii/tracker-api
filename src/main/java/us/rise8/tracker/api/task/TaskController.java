@@ -5,12 +5,14 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import us.rise8.tracker.api.AbstractCRUDController;
+import us.rise8.tracker.api.task.dto.CreateTaskDTO;
 import us.rise8.tracker.api.task.dto.TaskDTO;
 import us.rise8.tracker.api.task.dto.UpdateTaskDTO;
 
@@ -24,6 +26,11 @@ public class TaskController extends AbstractCRUDController<Task, TaskDTO, TaskSe
     @Autowired
     public TaskController(TaskService taskService) {
         super(taskService);
+    }
+
+    @PostMapping
+    public TaskDTO create(@Valid @RequestBody CreateTaskDTO createTaskDTO, @PathVariable Long id) {
+        return service.create(createTaskDTO).toDto();
     }
 
     @PutMapping("/{id}")

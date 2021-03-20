@@ -7,21 +7,25 @@ import us.rise8.tracker.api.AbstractCRUDService;
 import us.rise8.tracker.api.task.dto.CreateTaskDTO;
 import us.rise8.tracker.api.task.dto.TaskDTO;
 import us.rise8.tracker.api.task.dto.UpdateTaskDTO;
+import us.rise8.tracker.api.user.UserService;
 import us.rise8.tracker.config.CustomProperty;
 
 @Service
 public class TaskService extends AbstractCRUDService<Task, TaskDTO, TaskRepository> {
 
     CustomProperty property;
+    UserService userService;
 
     @Autowired
-    public TaskService(TaskRepository repository, CustomProperty property) {
+    public TaskService(TaskRepository repository, CustomProperty property, UserService userService) {
         super(repository, Task.class, TaskDTO.class);
         this.property = property;
+        this.userService = userService;
     }
 
-    public Task create(Long id, CreateTaskDTO createTaskDTO) {
-        Task task = getObject(id);
+    public Task create(CreateTaskDTO createTaskDTO) {
+        Task task = new Task();
+        task.setUser(userService.getObject(createTaskDTO.getUserId()));
         task.setDetail(createTaskDTO.getDetail());
         task.setComplete(createTaskDTO.isComplete());
 

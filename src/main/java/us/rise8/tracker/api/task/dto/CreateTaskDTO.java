@@ -13,5 +13,6 @@ import lombok.Setter;
 public class CreateTaskDTO {
     @NotBlank
     private String detail;
+    private Long userId;
     private boolean isComplete;
 }
