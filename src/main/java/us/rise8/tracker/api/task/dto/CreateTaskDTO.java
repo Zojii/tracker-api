@@ -7,12 +7,15 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import us.rise8.tracker.api.task.validation.UserExists;
+
 @Getter @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 public class CreateTaskDTO {
     @NotBlank
     private String detail;
+    @UserExists
     private Long userId;
     private boolean isComplete;
 }
