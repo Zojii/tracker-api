@@ -23,7 +23,7 @@ import us.rise8.tracker.api.user.dto.UserDTO;
 @Table(name = "users")
 public class User extends AbstractEntity<UserDTO> {
 
-    @Column(columnDefinition = "VARCHAR(100)")
+    @Column(columnDefinition = "VARCHAR(100)", unique = true)
     private String email;
 
     @OneToMany(orphanRemoval = true, cascade = CascadeType.ALL, mappedBy = "user")
