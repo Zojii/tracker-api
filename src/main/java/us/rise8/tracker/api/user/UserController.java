@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import us.rise8.tracker.api.AbstractCRUDController;
+import us.rise8.tracker.api.user.dto.CreateUserDTO;
 import us.rise8.tracker.api.user.dto.UserDTO;
 
 @CrossOrigin
@@ -23,7 +24,7 @@ public class UserController extends AbstractCRUDController<User, UserDTO, UserSe
     }
 
     @PutMapping("/email")
-    public UserDTO getByEmail(@RequestBody UserDTO user) {
+    public UserDTO getByEmail(@RequestBody CreateUserDTO user) {
         return service.getByEmail("e.b@c").toDto();
     }
 }

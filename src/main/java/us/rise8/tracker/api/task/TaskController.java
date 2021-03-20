@@ -29,7 +29,7 @@ public class TaskController extends AbstractCRUDController<Task, TaskDTO, TaskSe
     }
 
     @PostMapping
-    public TaskDTO create(@Valid @RequestBody CreateTaskDTO createTaskDTO, @PathVariable Long id) {
+    public TaskDTO create(@Valid @RequestBody CreateTaskDTO createTaskDTO) {
         return service.create(createTaskDTO).toDto();
     }
 
