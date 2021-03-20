@@ -34,7 +34,7 @@ public class Task extends AbstractEntity<TaskDTO> {
     private User user;
 
     public TaskDTO toDto() {
-        return new TaskDTO(id, detail, creationDate, isComplete, task.getId());
+        return new TaskDTO(id, detail, creationDate, isComplete, user.getId());
     }
 
     @Override
