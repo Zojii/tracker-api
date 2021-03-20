@@ -24,7 +24,7 @@ public class UserController extends AbstractCRUDController<User, UserDTO, UserSe
     }
 
     @PutMapping("/email")
-    public UserDTO getByEmail(@RequestBody CreateUserDTO user) {
-        return service.getByEmail(user.getEmail()).toDto();
+    public UserDTO getByEmail(@RequestBody CreateUserDTO dto) {
+        return service.getByEmail(dto.getEmail()).toDto();
     }
 }

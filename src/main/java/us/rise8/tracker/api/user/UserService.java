@@ -19,7 +19,7 @@ public class UserService extends AbstractCRUDService<User, UserDTO, UserReposito
     }
 
     public User getByEmail(String email) {
-        return repository.findByEmail(email).orElse( repository.save(new User(email)));
+        return repository.findByEmail(email).orElseGet(() -> repository.save(new User(email)));
     }
 
 }

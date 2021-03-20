@@ -11,7 +11,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class UpdateTaskDTO {
-    @NotBlank
+    @NotBlank(message = "Please enter a description for your task")
     private String detail;
     private boolean isComplete;
 }

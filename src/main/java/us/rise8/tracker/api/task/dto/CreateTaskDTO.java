@@ -13,7 +13,7 @@ import us.rise8.tracker.api.task.validation.UserExists;
 @AllArgsConstructor
 @NoArgsConstructor
 public class CreateTaskDTO {
-    @NotBlank
+    @NotBlank(message = "Please enter a description for your task")
     private String detail;
     @UserExists
     private Long userId;

@@ -16,6 +16,6 @@ public class TaskDTO implements AbstractDTO {
     private String detail;
     private LocalDateTime creationDate;
     private boolean isComplete;
-    private Long taskId;
+    private Long userId;
 }
 
