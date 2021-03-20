@@ -15,6 +15,7 @@ import lombok.Setter;
 
 import us.rise8.tracker.api.AbstractEntity;
 import us.rise8.tracker.api.task.dto.TaskDTO;
+import us.rise8.tracker.api.user.User;
 
 @Entity @Getter @Setter
 @AllArgsConstructor
@@ -30,7 +31,7 @@ public class Task extends AbstractEntity<TaskDTO> {
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id")
-    private Task task;
+    private User user;
 
     public TaskDTO toDto() {
         return new TaskDTO(id, detail, creationDate, isComplete, task.getId());
