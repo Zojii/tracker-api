@@ -26,7 +26,7 @@ public class User extends AbstractEntity<UserDTO> {
     @Column(columnDefinition = "VARCHAR(100)", unique = true)
     private String email;
 
-    @OneToMany(orphanRemoval = true, cascade = CascadeType.ALL, mappedBy = "user")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
     private Set<Task> tasks = new HashSet<>();
 
     public UserDTO toDto() {
